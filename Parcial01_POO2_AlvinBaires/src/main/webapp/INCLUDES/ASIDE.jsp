@@ -15,13 +15,7 @@
                           <span>Mantenimientos</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="Lugares.jsp">Lugares</a></li>
-                      </ul>
-                      <ul class="sub">
-                          <li><a  href="TipoDocu.jsp">Tipo Documento</a></li>
-                      </ul>
-                      <ul class="sub">
-                          <li><a  href="TipoGafe.jsp">Tigo Gafete</a></li>
+                          <li><a  href="Alumnos.jsp">Alumnos</a></li>
                       </ul>
                   </li>
                   

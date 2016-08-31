@@ -5,10 +5,11 @@
  */
 package com.sv.udb.vistas;
 
-import com.sv.udb.controlador.*;
-import com.sv.udb.modelo.*;
+import com.sv.udb.controlador.AlumnosCtrl;
+import com.sv.udb.modelo.Alumnos;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,11 +18,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Alvin
- * @version 1.0 27 de Agosto de 2016
+ *
+ * @author Laboratorio
  */
-@WebServlet(name = "TipoGafeServ", urlPatterns = {"/TipoGafeServ"})
-public class TipoGafeServ extends HttpServlet {
+@WebServlet(name = "AlumnosServ", urlPatterns = {"/AlumnosServ"})
+public class AlumnosServ extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,51 +35,45 @@ public class TipoGafeServ extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        boolean esValido = request.getMethod().equals("POST");
-        if(esValido)
-        {
-            String mens = "";
-            String CRUD = request.getParameter("accionBtn");
-            if(CRUD.equals("Guardar"))
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            boolean esValido = request.getMethod().equals("POST");
+            if(esValido)
             {
-                TipoGafe obje = new TipoGafe();
-                obje.setNombTipoGafe(request.getParameter("nomb"));
-                obje.setFechAlta(new Date());
-                obje.setEsta(1);
-                mens = new TipoGafeCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
-            }
-            else if(CRUD.equals("Eliminar"))
-            {
-                
-                 Long Codigo = Long.parseLong(request.getParameter("codiRadi") == null ? 
-                            "0" : request.getParameter("codiRadi"));
-                mens = new TipoGafeCtrl().elim(Codigo) ? "Datos Eliminados" : "Datos no eliminados"; 
-            }
-            else if(CRUD.equals("Consultar"))
-            {
-                Long Codigo = Long.parseLong(request.getParameter("codiRadi") == null ? 
-                            "0" : request.getParameter("codiRadi"));
-                    TipoGafe objeto = new TipoGafeCtrl().get(Codigo);
-                    if(objeto != null)
+                String mens = "";
+                String CRUD = request.getParameter("accionBtn");
+                if(CRUD.equals("Guardar"))
+                {
+                    Alumnos obje = new Alumnos();
+                    obje.setNombAlum(request.getParameter("nombre"));
+                    obje.setApelAlum(request.getParameter("apellido"));
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    Date fechaNacimiento;
+                    try
                     {
-                        //System.out.println(objeLuga.getCodiLugaAcce() +" "+objeLuga.getNombLugaAcce());
-                        request.setAttribute("codi", objeto.getCodiTipoGafe());
-                        request.setAttribute("nomb", objeto.getNombTipoGafe());
-                     }
+                       fechaNacimiento= formatter.parse(request.getParameter("fechaNacimiento"));
+                    }
+                    catch(Exception err)
+                    {
+                        fechaNacimiento=new Date();
+                    }
+                            
+                   
+                    obje.setFechNaciAlum(fechaNacimiento);
+                    obje.setMailAlum(request.getParameter("correo"));
+                    obje.setTeleAlum(request.getParameter("telefono"));
+                    obje.setDireAlum(request.getParameter("direccion"));
+                    obje.setGeneAlum((request.getParameter("genero")).charAt(0));
+                    
+                    mens = new AlumnosCtrl().guar(obje) ? "Datos guardados exitosamente" : "Datos NO guardados";
+                }
+                request.setAttribute("mensAler", mens);
+                request.getRequestDispatcher("/Alumnos.jsp").forward(request, response);
             }
-            else if(CRUD.equals("Modificar"))
+            else
             {
-                 TipoGafe obje = new TipoGafe();
-                obje.setNombTipoGafe(request.getParameter("nomb"));
-                obje.setEsta(1);
-                obje.setCodiTipoGafe(Long.parseLong(request.getParameter("codi")));
-                mens = new TipoGafeCtrl().modi(obje) ? "Datos modificados" : "Datos no modificados";
+                response.sendRedirect(request.getContextPath() + "/Alumnos.jsp");
             }
-            request.getRequestDispatcher("/TipoGafe.jsp").forward(request, response);
-        }
-        else
-        {
-            response.sendRedirect(request.getContextPath() + "/TipoGafe.jsp");
         }
     }
 

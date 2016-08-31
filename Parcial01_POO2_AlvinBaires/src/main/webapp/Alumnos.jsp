@@ -53,10 +53,10 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <form  action="LugaAcceServ" class="form-horizontal style-form" method="POST">
+      <form  action="AlumnosServ" class="form-horizontal style-form" method="POST">
       <section id="main-content">          
               <section class="wrapper">
-                  <h3><i class="fa fa-angle-right"></i>Lugares</h3>
+                  <h3><i class="fa fa-angle-right"></i>Alumnos</h3>
 
                   <!-- BASIC FORM ELELEMNTS -->
                   <div class="row mt">
@@ -64,63 +64,48 @@
                           <div class="form-panel">
                                   <h4 class="mb" id="mensaje">${mensAler}</h4>
 
-                                  <input type="hidden" name="codi" value="${codi}"/>
-
                                   <div class="form-group">
                                       <div class="col-sm-12">
-                                          <label for="nomb">Nombre: </label>
-                                            <input class="form-control" type="text" name="nomb" id="nomb"value="${nomb}" />
+                                          <label for="nombre">Nombre: </label>
+                                            <input class="form-control" type="text" name="nombre"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="apellido">Apellido: </label>
+                                            <input class="form-control" type="text" name="apellido"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="fechaNacimiento">Fecha Nacimiento: </label>
+                                            <input class="form-control" type="date" name="fechaNacimiento"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="correo">Correo electrónico: </label>
+                                            <input class="form-control" type="text" name="correo"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="telefono">Teléfono </label>
+                                            <input class="form-control" type="text" name="telefono"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="direccion">Dirección </label>
+                                            <input class="form-control" type="text" name="direccion"/>
+                                      </div>
+                                      <div class="col-sm-12">
+                                          <label for="genero">Género </label>
+                                          <select class="form-control" name="genero">
+                                              <option value="f">Femenino</option>
+                                              <option value="m">Masculino</option>
+                                          </select>
                                       </div>
                                   </div>
                                       
                                       
                               <div class="col s12 center-align">
-                                  <input type="submit" name="accionBtn" value="Guardar" class="btn btn-default" />                                    
-                                    <input type="submit" name="accionBtn" value="Modificar" class="btn btn-default" />                                    
+                                  <input type="submit" name="accionBtn" value="Guardar" class="btn btn-default" />                                        
                               </div>    
                           </div>
                       </div><!-- col-lg-12-->      	
                   </div><!-- /row -->
-              </section>
-              <section class="wrapper">
-                  <div class="row">
-
-                      <div class="col-lg-12">
-                          <div class="content-panel">
-                              <h4><i class="fa fa-angle-right"></i>Listado de Lugares de Acceso</h4>
-                              <hr>
-                                  <section class="col-md-12">
-                                      <jsp:useBean id="LugaAcceCtrl" class="com.sv.udb.controlador.LugaAcceCtrl" scope="page"/>
-                                        <table class="table">
-                                            <thead>
-                                                <tr>
-                                                    <th>Nombre</th>
-                                                    <th>Fecha Alta</th>
-                                                    <th>Fecha Baja</th>
-                                                     <th>Seleccione</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <c:forEach items="${LugaAcceCtrl.ConsTodo()}" var="fila">
-                                                    <tr>
-                                                        <td><c:out value="${fila.nombLugaAcce}"></c:out></td>
-                                                        <td><c:out value="${fila.fechAlta}"></c:out></td>
-                                                        <td><c:out value="${fila.fechBaja}"></c:out></td>
-                                                        <c:if test="${fila.esta == 1}">
-                                                        <td> <input type="radio" name="codiRadi" value="${fila.codiLugaAcce}"/></td>
-                                                        </c:if>
-                                                    </tr>
-                                                </c:forEach>
-                                            </tbody>
-                                        </table>
-                                  </section>                        
-                                      <input type="submit" name="accionBtn" value="Consultar" class="btn btn-default" />
-                                      <input type="submit" name="accionBtn" value="Eliminar" class="btn btn-default" />
-                              </div>
-                          </div>
-                      </div>
-              </section><! --/wrapper -->
-          
+              </section>      
       </section><!-- /MAIN CONTENT -->
       </form>
       <!--main content end-->
