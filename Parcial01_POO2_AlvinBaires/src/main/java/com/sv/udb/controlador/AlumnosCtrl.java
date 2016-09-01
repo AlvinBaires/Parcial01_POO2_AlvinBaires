@@ -1,5 +1,6 @@
 package com.sv.udb.controlador;
 import com.sv.udb.modelo.*;
+import com.sv.udb.controlador.*;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -37,8 +38,8 @@ public class AlumnosCtrl {
     public List<Alumnos>  ConsTodo()
     {
         List<Alumnos> resp = new ArrayList<>();
-          EntityManagerFactory emf = Persistence.createEntityManagerFactory("POOPU");
-           EntityManager em = emf.createEntityManager();
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("POOPU");
+        EntityManager em = emf.createEntityManager();
         try
         {
           TypedQuery<Alumnos> query =em.createNamedQuery("Alumnos.findAll", Alumnos.class);
@@ -48,9 +49,9 @@ public class AlumnosCtrl {
         {
             System.out.println(ex.getMessage());
         }
-        return resp;
-       
-    }
+        return resp;       
+    }   
+
     
     public static Alumnos get(Integer empId){        
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("POOPU");

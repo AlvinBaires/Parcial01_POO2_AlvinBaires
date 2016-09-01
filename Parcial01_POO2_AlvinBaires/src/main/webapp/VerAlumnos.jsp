@@ -63,26 +63,20 @@
                       <div class="col-lg-12">
                           <div class="form-panel">
                                   <h4 class="mb" id="mensaje">${mensAler}</h4>
-                                  <jsp:useBean id="BeanAlumnos" class="com.sv.udb.controlador.AlumnosCtrl" scope="page"/>
-                                  <jsp:useBean id="BeanGrupos" class="com.sv.udb.controlador.GruposCtrl" scope="page"/>
+                                  <jsp:useBean id="BeanGruposAlumnos" class="com.sv.udb.controlador.GruposAlumnosCtrl" scope="page"/>
                                   <div class="form-group">
                                       <div class="col-sm-12">
                                           <label for="nombre">Alumno </label>
                                           <select class="form-control" name="alumno">
-                                              <c:forEach items="${BeanAlumnos.ConsTodo()}" var="fila">
-                                                  <option value="${fila.codiAlum}">${fila.nombAlum} ${fila.apelAlum}</option>
+                                              <%
+                                                  int codigoGrupo = Integer.parseInt(request.getParameter("grupo"));
+                                              %>
+                                              <c:forEach items="${BeanAlumnos.ConsPorGrupo(1)}" var="fila">
+                                                  <option value="${fila.codiAlum.codiAlum}">${fila.codiAlum.nombAlum} ${fila.codiAlum.apelAlum}</option>
                                               </c:forEach>
                                           </select>
                                       </div>
-                                      <div class="col-sm-12">
-                                          <label for="apellido">Grupo: </label>
-                                          <select class="form-control" name="grupo">
-                                              <c:forEach items="${BeanGrupos.ConsTodo()}" var="fila">
-                                                  <option value="${fila.codiGrup}">${fila.nombGrup}</option>
-                                              </c:forEach>
-                                          </select>
-                                      </div>
-                                      
+                                                                            
                                   </div>
                                       
                                       
@@ -96,37 +90,7 @@
       </section><!-- /MAIN CONTENT -->
       </form>
                                   
-      <form  action="VerAlumnos.jsp" class="form-horizontal style-form" method="POST">
-      <section id="main-content">          
-              <section class="wrapper">
-                  <h3><i class="fa fa-angle-right"></i>Listado de Alumnos en Grupos</h3>
-
-                  <!-- BASIC FORM ELELEMNTS -->
-                  <div class="row mt">
-                      <div class="col-lg-12">
-                          <div class="form-panel">
-                                  <div class="form-group">
-                                      <div class="col-sm-12">
-                                          <label for="grupo">Grupo: </label>
-                                          <select class="form-control" name="grupo">
-                                              <c:forEach items="${BeanGrupos.ConsTodo()}" var="fila">
-                                                  <option value="${fila.codiGrup}">${fila.nombGrup}</option>
-                                              </c:forEach>
-                                          </select>
-                                      </div>
-                                      
-                                  </div>
-                                      
-                                      
-                              <div class="col s12 center-align">
-                                  <input type="submit" name="accionBtn" value="Guardar" class="btn btn-default" />                                        
-                              </div>    
-                          </div>
-                      </div><!-- col-lg-12-->      	
-                  </div><!-- /row -->
-              </section>      
-      </section><!-- /MAIN CONTENT -->
-      </form>
+      
       <!--main content end-->
       <!--footer start-->
       <jsp:include page="INCLUDES/FOOTER.jsp" flush="true" />
