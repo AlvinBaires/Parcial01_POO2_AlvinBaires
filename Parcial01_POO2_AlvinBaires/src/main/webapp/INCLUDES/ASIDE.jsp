@@ -17,6 +17,10 @@
                       <ul class="sub">
                           <li><a  href="Alumnos.jsp">Alumnos</a></li>
                       </ul>
+                      
+                      <ul class="sub">
+                          <li><a  href="AlumnosEnGrupos.jsp">Alumnos en Grupos</a></li>
+                      </ul>
                   </li>
                   
                    <!--<li class="sub-menu">

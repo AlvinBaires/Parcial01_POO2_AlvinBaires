@@ -15,7 +15,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Alumnos</title>
+    <title>Alumnos en Grupos</title> 
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
@@ -53,49 +53,36 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <form  action="AlumnosServ" class="form-horizontal style-form" method="POST">
+      <form  action="GruposAlumnosServ" class="form-horizontal style-form" method="POST">
       <section id="main-content">          
               <section class="wrapper">
-                  <h3><i class="fa fa-angle-right"></i>Alumnos</h3>
+                  <h3><i class="fa fa-angle-right"></i>Alumnos en Grupos</h3>
 
                   <!-- BASIC FORM ELELEMNTS -->
                   <div class="row mt">
                       <div class="col-lg-12">
                           <div class="form-panel">
                                   <h4 class="mb" id="mensaje">${mensAler}</h4>
-
+                                  <jsp:useBean id="BeanAlumnos" class="com.sv.udb.controlador.AlumnosCtrl" scope="page"/>
+                                  <jsp:useBean id="BeanGrupos" class="com.sv.udb.controlador.GruposCtrl" scope="page"/>
                                   <div class="form-group">
                                       <div class="col-sm-12">
-                                          <label for="nombre">Nombre: </label>
-                                            <input class="form-control" type="text" name="nombre"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="apellido">Apellido: </label>
-                                            <input class="form-control" type="text" name="apellido"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="fechaNacimiento">Fecha Nacimiento: </label>
-                                            <input class="form-control" type="date" name="fechaNacimiento"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="correo">Correo electrónico: </label>
-                                            <input class="form-control" type="text" name="correo"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="telefono">Teléfono </label>
-                                            <input class="form-control" type="text" name="telefono"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="direccion">Dirección </label>
-                                            <input class="form-control" type="text" name="direccion"/>
-                                      </div>
-                                      <div class="col-sm-12">
-                                          <label for="genero">Género </label>
-                                          <select class="form-control" name="genero">
-                                              <option value="f">Femenino</option>
-                                              <option value="m">Masculino</option>
+                                          <label for="nombre">Alumno </label>
+                                          <select class="form-control" name="alumno">
+                                              <c:forEach items="${BeanAlumnos.ConsTodo()}" var="fila">
+                                                  <option value="${fila.codiAlum}">${fila.nombAlum} ${fila.apelAlum}</option>
+                                              </c:forEach>
                                           </select>
                                       </div>
+                                      <div class="col-sm-12">
+                                          <label for="apellido">Grupo: </label>
+                                          <select class="form-control" name="grupo">
+                                              <c:forEach items="${BeanGrupos.ConsTodo()}" var="fila">
+                                                  <option value="${fila.codiGrup}">${fila.nombGrup}</option>
+                                              </c:forEach>
+                                          </select>
+                                      </div>
+                                      
                                   </div>
                                       
                                       
