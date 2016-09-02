@@ -53,10 +53,10 @@
       MAIN CONTENT
       *********************************************************************************************************************************************************** -->
       <!--main content start-->
-      <form  action="GruposAlumnosServ" class="form-horizontal style-form" method="POST">
+      <form  action="VerReporte" class="form-horizontal style-form" method="POST">
       <section id="main-content">          
               <section class="wrapper">
-                  <h3><i class="fa fa-angle-right"></i>Alumnos en Grupos</h3>
+                  <h3><i class="fa fa-angle-right"></i>Alumnos en Grupos ${request.getParameter("grupo")}</h3>
 
                   <!-- BASIC FORM ELELEMNTS -->
                   <div class="row mt">
@@ -67,21 +67,35 @@
                                   <div class="form-group">
                                       <div class="col-sm-12">
                                           <label for="nombre">Alumno </label>
-                                          <select class="form-control" name="alumno">
-                                              <%
-                                                  int codigoGrupo = Integer.parseInt(request.getParameter("grupo"));
-                                              %>
-                                              <c:forEach items="${BeanAlumnos.ConsPorGrupo(1)}" var="fila">
-                                                  <option value="${fila.codiAlum.codiAlum}">${fila.codiAlum.nombAlum} ${fila.codiAlum.apelAlum}</option>
-                                              </c:forEach>
-                                          </select>
+                                          <table class="table">
+                                              <thead>
+                                                <th>Alumno</th>
+                                                <th>Grupo</th>
+                                              </thead>
+                                              <tbody>
+                                                  <%
+                                                    int codigo=Integer.parseInt(request.getParameter("grupo"));
+                                                    for(GruposAlumnos temp: new GruposAlumnosCtrl().ConsPorGrupo(codigo))
+                                                    {
+                                                         System.out.println("Nombre " + temp.getCodiAlum().getNombAlum());
+                                                        %>
+                                                        <tr>
+                                                            <td><%=temp.getCodiAlum().getNombAlum()%></td>
+                                                            <td><%=temp.getCodiGrup().getNombGrup()%></td>
+                                                        </tr>
+                                                        <% }
+                                                    %>
+                                              </tbody>
+                                          </table>
+                                          
                                       </div>
                                                                             
                                   </div>
                                       
                                       
                               <div class="col s12 center-align">
-                                  <input type="submit" name="accionBtn" value="Guardar" class="btn btn-default" />                                        
+                                  <input type="submit" name="accionBtn" value="Ver Reporte" class="btn btn-default" /> 
+                                  <a value="Volver" href="AlumnosEnGrupos.jsp" class="btn btn-default" >Volver</a> 
                               </div>    
                           </div>
                       </div><!-- col-lg-12-->      	

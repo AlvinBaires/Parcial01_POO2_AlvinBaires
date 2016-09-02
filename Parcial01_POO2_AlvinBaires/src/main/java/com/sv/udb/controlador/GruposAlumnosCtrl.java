@@ -6,6 +6,7 @@
 package com.sv.udb.controlador;
 
 import com.sv.udb.modelo.Alumnos;
+import com.sv.udb.modelo.Grupos;
 import com.sv.udb.modelo.GruposAlumnos;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,15 +22,18 @@ import javax.persistence.TypedQuery;
  */
 public class GruposAlumnosCtrl {
     
-    public List<GruposAlumnos>  ConsPorGrupo(int idGrupo)
+    public static List<GruposAlumnos>  ConsPorGrupo(int idGrupo)
     {
         List<GruposAlumnos> resp = new ArrayList<>();
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("POOPU");
         EntityManager em = emf.createEntityManager();
         try
         {
+          System.out.println("idGrupo "+idGrupo);
+          System.out.println("Que ondas");
           TypedQuery<GruposAlumnos> query =em.createNamedQuery("GruposAlumnos.findByCodiGrupAlum", GruposAlumnos.class);
-          query.setParameter("codiGrupAlum", idGrupo);
+          Grupos objeGrupo = GruposCtrl.get(idGrupo);
+          query.setParameter("codiGrupAlum", objeGrupo);
           resp = query.getResultList();
         }
         catch(Exception ex)
